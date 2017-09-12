@@ -33,7 +33,7 @@ class InputZone extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      label : "hola"
+      label : "Escribe algo! :)"
     }
     this.onChangeName = this.onChangeName.bind(this);
   }
@@ -41,8 +41,9 @@ class InputZone extends React.Component{
   onChangeName(event)
   {
     var text = event.target.value
-    console.log(text)
-    //console.log (this.state.label)
+    if (text.length == 0) {
+      text = "Escribe algo! :)"
+    }
     this.setState({label: text})
   }
 
