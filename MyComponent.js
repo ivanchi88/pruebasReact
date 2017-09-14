@@ -53,7 +53,7 @@ class Mapa extends React.Component {
   constructor (props){
     super(props);
     //let map = new google.maps.Map();
-    this.state = {map : null, center:this.props.center}
+    this.state = {map : null, center:this.props.center, markers : []}
   }
 
   componentDidMount(prevProps, prevState){
@@ -74,6 +74,17 @@ class Mapa extends React.Component {
   }
     componentDidUpdate(nextProps, nextState) {
       this.state.map.setCenter(this.props.center)
+
+      let image = "./img/gota.png"
+      let map = this.state.map
+      let center = this.props.center
+      let dropMarker = new google.maps.Marker({
+        position: center,
+        map: map,
+        icon: image});
+      this.state.markers.push(dropMarker);
+      console.log(this.state.center)
+      //console.log(this.state.markers)
   }
 
   render (){
@@ -95,7 +106,7 @@ class MyComponent extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {busqueda: "", mapCenter: {lat: 40.4167754, lng: -3.7037901999999576}, }
+    this.state = {busqueda: "", mapCenter: {lat: 40.4167754, lng: -3.7037901999999576} }
     this.onSubmitButton = this.onSubmitButton.bind(this)
   }
 
