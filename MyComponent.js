@@ -4,13 +4,13 @@ import React from 'react'
 
 function CuadroTexto (props){
   return ( 
-    <input type = "text" onChange = { (event) => {props.onChangeName(event)} } />
+    <input style = {props.style.inputBoxStyle} type = "text" onChange = { (event) => {props.onChangeName(event)} } />
     )
 }
 
 function SearchButton (props){
   return (
-      <button onClick = { () => {props.onSubmitButton(props.label)}}>Buscar</button>
+      <button style = {props.style.searchButtonStyle} onClick = { () => {props.onSubmitButton(props.label)}}>Buscar</button>
     )
 
 
@@ -38,12 +38,14 @@ class InputZone extends React.Component{
 
   render(){
     return (
-       <div>
+       <div >
           <div name = "InputLine">
-            <CuadroTexto onChangeName = {this.onChangeName}/> 
-            <SearchButton onSubmitButton = {this.props.onSubmitButton} label = {this.state.label} />
+            <CuadroTexto style = {this.props.style} onChangeName = {this.onChangeName}/> 
+            <SearchButton style = {this.props.style} onSubmitButton = {this.props.onSubmitButton} label = {this.state.label} />
           </div>
+          <span style = {this.props.style.inputStyle}>
           {this.state.label}
+          </span>
        </div> 
       )
   }
@@ -88,10 +90,10 @@ class Mapa extends React.Component {
   }
 
   render (){
-    
+    let mapStyles = require ('./styles/mapStyle.js')
     return (
       <div>
-        <div style = {{height: '400px', width: '400px'}} id = 'map'>MAPA</div>
+        <div style = {mapStyles.mapStyle} id = 'map'>MAPA</div>
       </div>
       ) 
 
@@ -125,10 +127,11 @@ class MyComponent extends React.Component {
   }
 
   render () {
+    let mapStyles = require ('./styles/mapStyle.js')
     return (
       <div>
-        <h1>HOLA :)</h1>
-        <InputZone onSubmitButton = {this.onSubmitButton}/>
+        <h1 style = {mapStyles.inputStyle}> HOLA :)</h1>
+        <InputZone style = {mapStyles} onSubmitButton = {this.onSubmitButton}/>
         <Mapa center = {this.state.mapCenter}/>
       </div>
     )
