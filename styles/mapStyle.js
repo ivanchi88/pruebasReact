@@ -19,7 +19,7 @@ module.exports = {
 	},
 	searchButtonStyle : {
 		position: 'relative',
-		left: '30%',
-		widht: '20px'
+		left: '30.5%',
+		width: '70px'
 	}
 }
