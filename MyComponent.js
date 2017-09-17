@@ -130,7 +130,7 @@ class MyComponent extends React.Component {
     let mapStyles = require ('./styles/mapStyle.js')
     return (
       <div>
-        <h1 style = {mapStyles.inputStyle}> HOLA :)</h1>
+        <h1 style = {mapStyles.inputStyle}>Hola :)</h1>
         <InputZone style = {mapStyles} onSubmitButton = {this.onSubmitButton}/>
         <Mapa center = {this.state.mapCenter}/>
       </div>
