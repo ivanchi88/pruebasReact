@@ -1,7 +1,7 @@
 var path = require('path');
 module.exports = {
   // JavaScript entry point
-  entry: './App.js',
+  entry: './src/js/App.js',
   // JavaScrip bundle file
   output: {
     path: path.resolve('./'),

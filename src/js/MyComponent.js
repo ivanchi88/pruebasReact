@@ -4,13 +4,14 @@ import React from 'react'
 
 function CuadroTexto (props){
   return ( 
-    <input style = {props.style.inputBoxStyle} type = "text" onChange = { (event) => {props.onChangeName(event)} } />
+    <input style = {props.style.inputBoxStyle} type = "text" onChange = { (event) => {props.onChangeName(event)} } 
+    onKeyDown = { (event) => { if (event.keyCode == 13) {props.submitDireccionMap(props.label)}}}/>
     )
 }
 
 function SearchButton (props){
   return (
-      <button style = {props.style.searchButtonStyle} onClick = { () => {props.onSubmitButton(props.label)}}>Buscar</button>
+      <button style = {props.style.searchButtonStyle} onClick = { () => {props.submitDireccionMap(props.label)}} >Buscar</button>
     )
 
 
@@ -40,8 +41,8 @@ class InputZone extends React.Component{
     return (
        <div >
           <div name = "InputLine">
-            <CuadroTexto style = {this.props.style} onChangeName = {this.onChangeName}/> 
-            <SearchButton style = {this.props.style} onSubmitButton = {this.props.onSubmitButton} label = {this.state.label} />
+            <CuadroTexto style = {this.props.style} onChangeName = {this.onChangeName} submitDireccionMap = {this.props.submitDireccionMap} label = {this.state.label}/> 
+            <SearchButton style = {this.props.style} submitDireccionMap = {this.props.submitDireccionMap} label = {this.state.label} />
           </div>
           <span style = {this.props.style.inputStyle}>
           {this.state.label}
@@ -61,7 +62,7 @@ class Mapa extends React.Component {
   componentDidMount(prevProps, prevState){
 
     //documento con la clave de la API de google
-    let key = require ('./mapsKey');
+    let key = require ('../apiKeys/google/mapsKey');
     let url = "https://maps.googleapis.com/maps/api/js?key=" + key.appKey;
     //cargar el script y crear un mapa
     let self = this;
@@ -90,7 +91,7 @@ class Mapa extends React.Component {
   }
 
   render (){
-    let mapStyles = require ('./styles/mapStyle.js')
+    let mapStyles = require ('../styles/mapStyle.js')
     return (
       <div>
         <div style = {mapStyles.mapStyle} id = 'map'>MAPA</div>
@@ -109,10 +110,10 @@ class MyComponent extends React.Component {
   constructor (props) {
     super(props)
     this.state = {busqueda: "", mapCenter: {lat: 40.4167754, lng: -3.7037901999999576} }
-    this.onSubmitButton = this.onSubmitButton.bind(this)
+    this.submitDireccionMap = this.submitDireccionMap.bind(this)
   }
 
-  onSubmitButton(text){
+  submitDireccionMap(text){
     var geocoder = new google.maps.Geocoder();
     let self = this;
     geocoder.geocode( {'address': text}, function(results, status){
@@ -127,11 +128,11 @@ class MyComponent extends React.Component {
   }
 
   render () {
-    let mapStyles = require ('./styles/mapStyle.js')
+    let mapStyles = require ('../styles/mapStyle.js')
     return (
       <div>
         <h1 style = {mapStyles.inputStyle}>Hola :)</h1>
-        <InputZone style = {mapStyles} onSubmitButton = {this.onSubmitButton}/>
+        <InputZone style = {mapStyles} submitDireccionMap = {this.submitDireccionMap}/>
         <Mapa center = {this.state.mapCenter}/>
       </div>
     )
