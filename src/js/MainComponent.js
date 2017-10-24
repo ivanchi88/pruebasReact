@@ -105,11 +105,11 @@ class Mapa extends React.Component {
 
 
 
-class MyComponent extends React.Component {
+class MainComponent extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {busqueda: "", mapCenter: {lat: 40.4167754, lng: -3.7037901999999576} }
+    this.state = {busqueda: "nada", mapCenter: {lat: 40.4167754, lng: -3.7037901999999576} }
     this.submitDireccionMap = this.submitDireccionMap.bind(this)
   }
 
@@ -125,6 +125,14 @@ class MyComponent extends React.Component {
         console.log('ERROR DE GEOCODING: ' + status);
       }
     })
+
+    //window.open('http://127.0.0.1:8000/hola');
+    fetch('http://127.0.0.1:8000/response')
+      .then((res) => {return res.json()})
+      .then((data) => {
+           console.log(data);
+           this.setState({busqueda: data.nombre})
+      })
   }
 
   render () {
@@ -132,6 +140,7 @@ class MyComponent extends React.Component {
     return (
       <div>
         <h1 style = {mapStyles.inputStyle}>Hola :)</h1>
+        <h3> {this.state.busqueda} </h3>
         <InputZone style = {mapStyles} submitDireccionMap = {this.submitDireccionMap}/>
         <Mapa center = {this.state.mapCenter}/>
       </div>
@@ -157,4 +166,4 @@ function loadScript(url, callback)
     head.appendChild(script);
 }
 
-export default MyComponent
+export default MainComponent

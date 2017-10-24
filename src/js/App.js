@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Import component
-import MyComponent from './MyComponent'
+import MainComponent from './MainComponent'
 
 
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(<MainComponent />, document.getElementById('root'))
